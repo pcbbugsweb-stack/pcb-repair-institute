@@ -1,1 +1,1582 @@
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#060d1f" />
+  <title>PCB BUGS – Professional PCB Repair Training Institute | Nagar Bazar, South Dumdum</title>
+  <meta name="description" content="Join PCB BUGS at Nagar Bazar, South Dumdum for 100% Practical PCB Repair Training. Flexible timing, no rigid batch system, free accommodation & parking, soldering practice & official completion certificate." />
+
+  <!-- Google Fonts: Inter, Hind Siliguri, JetBrains Mono & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Hind Siliguri', 'sans-serif'],
+            bengali: ['Hind Siliguri', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            pcb: {
+              navy: '#060d1f',
+              slate: '#0a142c',
+              card: '#0d1936',
+              cardHover: '#132347',
+              border: '#1d325c',
+              green: '#00e676',
+              greenDark: '#00c853',
+              cyan: '#00e5ff',
+              amber: '#ffca28',
+            }
+          },
+          animation: {
+            'float': 'float 5s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2.8s infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 0 0 rgba(0, 230, 118, 0.45)' },
+              '50%': { boxShadow: '0 0 0 10px rgba(0, 230, 118, 0)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Base Mobile-First Reset & Fluid Typography */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+      background-color: #060d1f;
+      color: #f1f5f9;
+      font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .fluid-hero-title {
+      font-size: clamp(1.85rem, 5.2vw, 3.5rem);
+      line-height: 1.15;
+    }
+
+    .fluid-section-title {
+      font-size: clamp(1.5rem, 3.8vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    /* High-Tech Circuit Board Background Pattern */
+    .pcb-bg {
+      background-color: #060d1f;
+      background-image:
+        radial-gradient(rgba(0, 230, 118, 0.12) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(0, 229, 255, 0.08) 1.5px, #060d1f 1.5px),
+        linear-gradient(to right, rgba(29, 50, 92, 0.22) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(29, 50, 92, 0.22) 1px, transparent 1px);
+      background-size: 40px 40px, 40px 40px, 64px 64px, 64px 64px;
+      background-position: 0 0, 20px 20px, 0 0, 0 0;
+    }
+
+    /* Glassmorphism Utilities */
+    .glass-nav {
+      background: rgba(6, 13, 31, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .glass-bottom-bar {
+      background: rgba(10, 20, 44, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* Minimum 48px Touch Targets */
+    .tap-target {
+      min-height: 48px;
+      min-width: 48px;
+    }
+
+    /* Horizontal Snap Carousel on Mobile */
+    .mobile-snap-row {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .mobile-snap-row::-webkit-scrollbar {
+      display: none;
+    }
+    .mobile-snap-card {
+      scroll-snap-align: start;
+      flex: 0 0 85%;
+    }
+    @media (min-width: 640px) {
+      .mobile-snap-card {
+        flex: 0 0 48%;
+      }
+    }
+    @media (min-width: 1024px) {
+      .mobile-snap-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        overflow-x: visible;
+      }
+      .mobile-snap-card {
+        flex: initial;
+      }
+    }
+
+    /* Realistic Gold-and-Navy Certificate Frame */
+    .cert-gold-frame {
+      background: linear-gradient(145deg, #0d1936 0%, #060d1f 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255, 202, 40, 0.55),
+        inset 0 0 0 6px rgba(6, 13, 31, 0.9),
+        inset 0 0 0 7px rgba(0, 230, 118, 0.35),
+        0 20px 45px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Active Bottom Tab Indicator */
+    .bottom-tab.active {
+      color: #00e676;
+    }
+    .bottom-tab.active .tab-icon-wrap {
+      background-color: rgba(0, 230, 118, 0.16);
+      border-color: rgba(0, 230, 118, 0.45);
+      transform: translateY(-2px);
+    }
+
+    /* Smooth FAQ Accordion */
+    .faq-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+    .faq-item.open .faq-content {
+      grid-template-rows: 1fr;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      color: #00e676;
+    }
+  </style>
+</head>
+<body class="pcb-bg antialiased selection:bg-pcb-green selection:text-pcb-navy pb-24 lg:pb-0">
+
+  <!-- Top Live Admission Ticker -->
+  <div class="bg-gradient-to-r from-pcb-slate via-pcb-card to-pcb-slate border-b border-pcb-border/80 py-2 px-3 text-center text-xs sm:text-sm relative z-50">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-pcb-green/15 text-pcb-green font-bold border border-pcb-green/35">
+        <span class="w-2 h-2 rounded-full bg-pcb-green animate-ping"></span>
+        Nagar Bazar, South Dumdum
+      </span>
+      <span class="font-bengali text-slate-200">
+        <strong class="text-pcb-amber">Free Accommodation &amp; Parking</strong> • No Batch System (Flexible Joining)
+      </span>
+      <a href="https://wa.me/919804265067?text=Hello%20PCB%20BUGS%2C%20Nagar%20Bazar.%20I%20want%20to%20enquire%20about%20courses." target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1 text-pcb-cyan font-bold hover:underline">
+        <i class="fa-brands fa-whatsapp text-pcb-green"></i> 09804265067
+      </a>
+    </div>
+  </div>
+
+  <!-- Sticky Top App Header -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-pcb-border/90">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Brand Logo -->
+        <a href="#home" class="flex items-center gap-2.5 sm:gap-3 tap-target">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-pcb-card border border-pcb-green/50 flex items-center justify-center shadow-lg shadow-pcb-green/10">
+            <!-- Custom SVG Microchip Emblem -->
+            <svg class="w-6 h-6 sm:w-7 sm:h-7 text-pcb-green" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="16" y="16" width="32" height="32" rx="6" stroke="currentColor" stroke-width="4" fill="#060d1f"/>
+              <rect x="23" y="23" width="18" height="18" rx="3" stroke="#00e5ff" stroke-width="2.5"/>
+              <circle cx="32" cy="32" r="3.5" fill="#ffca28"/>
+              <path d="M22 16V7M32 16V7M42 16V7M22 48V57M32 48V57M42 48V57M16 22H7M16 32H7M16 42H7M48 22H57M48 32H57M48 42H57" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-1 leading-none">
+              <span class="text-xl sm:text-2xl font-black tracking-tight text-white">PCB</span>
+              <span class="text-xl sm:text-2xl font-black tracking-tight text-pcb-green">BUGS</span>
+            </div>
+            <p class="text-[10px] sm:text-xs text-slate-400 font-medium mt-0.5">Nagar Bazar, South Dumdum</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-slate-300">
+          <a href="#home" class="hover:text-pcb-green transition-colors">Home</a>
+          <a href="#pricing" class="hover:text-pcb-green transition-colors">Courses &amp; Fees</a>
+          <a href="#details" class="hover:text-pcb-green transition-colors">Workshop &amp; Facilities</a>
+          <a href="#certificate" class="hover:text-pcb-amber transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-award text-pcb-amber"></i> Certificate
+          </a>
+          <a href="#location" class="hover:text-pcb-cyan transition-colors">Nagar Bazar Map</a>
+          <a href="#faq" class="hover:text-pcb-green transition-colors">FAQ</a>
+        </nav>
+
+        <!-- Header Right Actions -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a href="#booking"
+             class="tap-target inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-5 py-2.5 rounded-xl bg-pcb-green hover:bg-pcb-greenDark text-pcb-navy font-extrabold text-xs sm:text-sm shadow-lg shadow-pcb-green/25 transition-all">
+            <span>Book Slot</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+
+          <!-- Mobile Hamburger Drawer Button -->
+          <button type="button" id="mobileMenuOpenBtn" aria-label="Open Navigation Menu"
+                  class="lg:hidden tap-target inline-flex items-center justify-center w-12 h-12 rounded-xl bg-pcb-card border border-pcb-border text-slate-200 hover:border-pcb-green hover:text-pcb-green transition-colors">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Slide-Over Drawer Menu -->
+  <div id="mobileDrawerBackdrop" class="fixed inset-0 z-50 bg-pcb-navy/80 backdrop-blur-sm hidden lg:hidden transition-opacity"></div>
+  <aside id="mobileDrawer" class="fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-pcb-slate border-l border-pcb-border shadow-2xl transform translate-x-full transition-transform duration-300 ease-out lg:hidden flex flex-col justify-between p-5">
+    <div>
+      <div class="flex items-center justify-between pb-4 border-b border-pcb-border">
+        <div class="flex items-center gap-2">
+          <span class="text-xl font-black text-white">PCB <span class="text-pcb-green">BUGS</span></span>
+        </div>
+        <button type="button" id="mobileMenuCloseBtn" aria-label="Close Navigation Menu"
+                class="tap-target w-11 h-11 rounded-xl bg-pcb-card border border-pcb-border text-slate-300 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <nav class="mt-5 space-y-2">
+        <a href="#home" class="drawer-link tap-target flex items-center gap-3 px-4 py-3 rounded-xl bg-pcb-card/60 hover:bg-pcb-card text-white font-semibold text-sm border border-transparent hover:border-pcb-green/40">
+          <i class="fa-solid fa-house text-pcb-green w-5"></i> Home
+        </a>
+        <a href="#pricing" class="drawer-link tap-target flex items-center gap-3 px-4 py-3 rounded-xl bg-pcb-card/60 hover:bg-pcb-card text-white font-semibold text-sm border border-transparent hover:border-pcb-green/40">
+          <i class="fa-solid fa-indian-rupee-sign text-pcb-amber w-5"></i> Courses &amp; Fees (₹15k–₹45k)
+        </a>
+        <a href="#details" class="drawer-link tap-target flex items-center gap-3 px-4 py-3 rounded-xl bg-pcb-card/60 hover:bg-pcb-card text-white font-semibold text-sm border border-transparent hover:border-pcb-green/40">
+          <i class="fa-solid fa-house-chimney text-pcb-cyan w-5"></i> Free Accommodation &amp; Parking
+        </a>
+        <a href="#certificate" class="drawer-link tap-target flex items-center gap-3 px-4 py-3 rounded-xl bg-pcb-card/60 hover:bg-pcb-card text-pcb-amber font-semibold text-sm border border-transparent hover:border-pcb-amber/40">
+          <i class="fa-solid fa-award text-pcb-amber w-5"></i> Completion Certificate
+        </a>
+        <a href="#location" class="drawer-link tap-target flex items-center gap-3 px-4 py-3 rounded-xl bg-pcb-card/60 hover:bg-pcb-card text-white font-semibold text-sm border border-transparent hover:border-pcb-cyan/40">
+          <i class="fa-solid fa-location-dot text-pcb-cyan w-5"></i> Nagar Bazar Center &amp; Map
+        </a>
+        <a href="#faq" class="drawer-link tap-target flex items-center gap-3 px-4 py-3 rounded-xl bg-pcb-card/60 hover:bg-pcb-card text-white font-semibold text-sm border border-transparent hover:border-pcb-green/40">
+          <i class="fa-solid fa-circle-question text-pcb-green w-5"></i> Student FAQs
+        </a>
+      </nav>
+    </div>
+
+    <div class="pt-4 border-t border-pcb-border space-y-3">
+      <div class="text-xs text-slate-400">
+        <p class="font-semibold text-slate-200">Nagar Bazar, South Dumdum, WB</p>
+        <p class="text-pcb-green font-bold">No Batch System • Flexible Timings</p>
+      </div>
+      <a href="https://wa.me/919804265067?text=Hello%20PCB%20BUGS%2C%20Nagar%20Bazar.%20I%20want%20to%20book%20a%20training%20slot." target="_blank" rel="noopener noreferrer"
+         class="tap-target w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-pcb-green text-pcb-navy font-extrabold text-sm shadow-lg">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>WhatsApp: 09804265067</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative pt-7 pb-14 sm:pt-14 sm:pb-20 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+        <!-- Hero Text & Bilingual Highlights -->
+        <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
+          <!-- Pill Badges -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pcb-green/15 border border-pcb-green/40 text-xs font-bold text-pcb-green">
+              <i class="fa-solid fa-bolt"></i> Soldering &amp; Workshop Practice
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pcb-cyan/15 border border-pcb-cyan/40 text-xs font-bold text-pcb-cyan">
+              <i class="fa-solid fa-house-chimney"></i> Free Accommodation &amp; Parking
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pcb-amber/15 border border-pcb-amber/40 text-xs font-bold text-pcb-amber">
+              <i class="fa-solid fa-users-rectangle"></i> No Batch System
+            </span>
+          </div>
+
+          <h1 class="fluid-hero-title font-black tracking-tight text-white">
+            Professional PCB Repair Training in <span class="text-transparent bg-clip-text bg-gradient-to-r from-pcb-green via-pcb-cyan to-pcb-amber">Nagar Bazar, South Dumdum</span>
+          </h1>
+
+          <p class="text-base sm:text-xl font-extrabold text-pcb-amber tracking-wide">
+            “1 Month, 2 Month &amp; 1 Year Practical Courses • Special Working Batch Available”
+          </p>
+
+          <!-- Bilingual Bengali Highlight Card -->
+          <div class="bg-pcb-card/95 border-l-4 border-pcb-green rounded-r-2xl p-4 sm:p-5 text-left shadow-xl space-y-1.5">
+            <p class="font-bengali text-base sm:text-lg font-bold text-white leading-snug">
+              নাগারবাজার, দক্ষিণ দমদম-এ হাতে-কলমে <span class="text-pcb-green">Soldering &amp; Workshop Training</span> দেওয়া হয়।
+            </p>
+            <p class="font-bengali text-sm sm:text-base text-slate-300 leading-relaxed">
+              এখানে কোনো ব্যাচ সিস্টেম নেই (Flexible Timing)। থাকার ও গাড়ি পার্কিংয়ের সম্পূর্ণ ব্যবস্থা ফ্রি!
+            </p>
+          </div>
+
+          <!-- Mobile-Optimized Full-Width CTA Buttons -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-1">
+            <a href="#booking"
+               class="tap-target inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-pcb-green hover:bg-pcb-greenDark text-pcb-navy font-black text-base shadow-xl shadow-pcb-green/25 transition-all">
+              <i class="fa-solid fa-calendar-check text-lg"></i>
+              <span>Book Your Training Slot Online</span>
+            </a>
+
+            <a href="https://wa.me/919804265067?text=Hello%20PCB%20BUGS%2C%20Nagar%20Bazar.%20I%20want%20to%20enquire%20about%20training%20fees%20and%20accommodation." target="_blank" rel="noopener noreferrer"
+               class="tap-target inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-pcb-card hover:bg-pcb-cardHover text-white border border-pcb-green/45 font-bold text-base transition-all">
+              <i class="fa-brands fa-whatsapp text-xl text-pcb-green"></i>
+              <span>📲 WhatsApp Enquiry</span>
+            </a>
+          </div>
+
+          <!-- Quick Key Specs Strip -->
+          <div class="grid grid-cols-3 gap-2.5 pt-3 border-t border-pcb-border/80 text-center lg:text-left">
+            <div class="p-2.5 rounded-xl bg-pcb-card/60 border border-pcb-border/60">
+              <p class="text-sm sm:text-lg font-extrabold text-white">₹15k – ₹45k</p>
+              <p class="text-[11px] sm:text-xs text-slate-400">1M, 2M &amp; 1Y Courses</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-pcb-card/60 border border-pcb-border/60">
+              <p class="text-sm sm:text-lg font-extrabold text-pcb-cyan">100% Free</p>
+              <p class="text-[11px] sm:text-xs text-slate-400">Accommodation &amp; Parking</p>
+            </div>
+            <div class="p-2.5 rounded-xl bg-pcb-card/60 border border-pcb-border/60">
+              <p class="text-sm sm:text-lg font-extrabold text-pcb-amber">No Batch</p>
+              <p class="text-[11px] sm:text-xs text-slate-400">Flexible Individual Learning</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right Card: Classroom Practical Lab Photo & Lightbox Trigger -->
+        <div class="lg:col-span-5">
+          <div class="rounded-3xl bg-gradient-to-b from-pcb-card to-pcb-slate border border-pcb-green/45 p-3.5 sm:p-5 shadow-2xl animate-float">
+            <!-- Top Lab Status Header -->
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-pcb-border">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-pcb-amber"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-pcb-green"></span>
+                <span class="ml-1.5 font-mono text-[11px] font-bold text-slate-300">NAGAR BAZAR WORKSHOP</span>
+              </div>
+              <span class="font-mono text-[10px] sm:text-[11px] font-bold text-pcb-green bg-pcb-green/10 px-2.5 py-0.5 rounded-md border border-pcb-green/30">
+                SOUTH DUMDUM
+              </span>
+            </div>
+
+            <!-- Interactive Photo Container -->
+            <div id="classroomPhotoTrigger"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Tap to view full-screen workshop lab photo"
+                 class="group relative rounded-2xl overflow-hidden border-2 border-pcb-green/50 bg-pcb-navy shadow-xl cursor-pointer">
+              <img
+                id="classroomPhotoImg"
+                src="146815_2.png"
+                alt="PCB BUGS Workshop & Soldering Practical Training - Nagar Bazar"
+                class="w-full h-56 sm:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              />
+
+              <!-- Overlay Gradient -->
+              <div class="absolute inset-0 bg-gradient-to-t from-pcb-navy/95 via-pcb-navy/25 to-transparent pointer-events-none"></div>
+
+              <!-- Floating Photo Badges -->
+              <div class="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 pointer-events-none">
+                <span class="px-2.5 py-1 rounded-lg bg-pcb-navy/90 backdrop-blur-md border border-pcb-green/45 text-pcb-green text-[10px] sm:text-[11px] font-bold">
+                  <i class="fa-solid fa-house-chimney mr-1"></i>Free Accommodation
+                </span>
+                <span class="px-2.5 py-1 rounded-lg bg-pcb-navy/90 backdrop-blur-md border border-pcb-amber/45 text-pcb-amber text-[10px] sm:text-[11px] font-bold">
+                  Free Parking
+                </span>
+                <span class="px-2.5 py-1 rounded-lg bg-pcb-navy/90 backdrop-blur-md border border-pcb-cyan/45 text-pcb-cyan text-[10px] sm:text-[11px] font-bold">
+                  Working Batch Available
+                </span>
+              </div>
+
+              <!-- Bottom Bar inside Photo -->
+              <div class="absolute bottom-2.5 inset-x-2.5 flex items-center justify-between gap-2">
+                <span class="text-xs font-bold text-white drop-shadow">
+                  <i class="fa-solid fa-screwdriver-wrench text-pcb-green mr-1"></i>Soldering &amp; Workshop Training
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-pcb-green text-pcb-navy text-[11px] font-extrabold shadow">
+                  <i class="fa-solid fa-magnifying-glass-plus"></i> Zoom
+                </span>
+              </div>
+            </div>
+
+            <!-- Quick Center Highlights -->
+            <div class="mt-3.5 space-y-2 text-xs sm:text-sm">
+              <div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-pcb-navy/90 border border-pcb-border/70">
+                <span class="text-slate-400"><i class="fa-solid fa-location-dot text-pcb-green mr-1.5"></i>Location</span>
+                <span class="font-bold text-white">Nagar Bazar, South Dumdum</span>
+              </div>
+              <div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-pcb-navy/90 border border-pcb-amber/35">
+                <span class="text-slate-300"><i class="fa-solid fa-calendar-day text-pcb-amber mr-1.5"></i>Demo Class</span>
+                <span class="font-bold text-pcb-amber">3 Days Demo @ ₹2,000 only</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing & Course Tiers Section (NEW: 1M 15k, 2M 30k, 1Y 45k, Demo 2k) -->
+  <section id="pricing" class="py-14 sm:py-20 bg-pcb-slate/70 border-y border-pcb-border/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-2.5">
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pcb-green/15 border border-pcb-green/35 text-pcb-green font-mono text-xs font-bold">
+          TRANSPARENT FEE STRUCTURE
+        </span>
+        <h2 class="fluid-section-title font-extrabold text-white">
+          Choose Your Training <span class="text-pcb-green">Duration &amp; Package</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-300 font-bengali">
+          নাগারবাজার সেন্টারে আপনার সুবিধা অনুযায়ী কোর্স সিলেক্ট করুন। <strong class="text-pcb-amber">থাকা ও গাড়ি পার্কিং সম্পূর্ণ ফ্রি!</strong>
+        </p>
+      </div>
+
+      <!-- 4 Pricing Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Card 1: 3 Days Demo -->
+        <div class="rounded-3xl bg-pcb-card border border-pcb-border hover:border-pcb-cyan p-6 flex flex-col justify-between shadow-xl transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-cyan border border-pcb-border">
+                TRIAL DEMO
+              </span>
+              <span class="text-xs text-slate-400 font-mono">3 Days</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">3 Days Demo Class</h3>
+            <p class="text-3xl sm:text-4xl font-black text-pcb-cyan my-3">₹2,000</p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-cyan mt-0.5"></i> Test workshop facilities</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-cyan mt-0.5"></i> Basic soldering practice</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-cyan mt-0.5"></i> Zero batch restrictions</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('3 Days Demo Class')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-cyan/15 hover:bg-pcb-cyan text-pcb-cyan hover:text-pcb-navy border border-pcb-cyan/45 font-extrabold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Book Demo</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+        <!-- Card 2: 1 Month Course -->
+        <div class="rounded-3xl bg-pcb-card border border-pcb-border hover:border-pcb-green p-6 flex flex-col justify-between shadow-xl transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-green border border-pcb-border">
+                FAST TRACK
+              </span>
+              <span class="text-xs text-slate-400 font-mono">1 Month</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">1 Month PCB Course</h3>
+            <p class="text-3xl sm:text-4xl font-black text-pcb-green my-3">₹15,000</p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-0.5"></i> Intensive workshop training</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-0.5"></i> Soldering &amp; component testing</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-0.5"></i> Free accommodation &amp; parking</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('1 Month PCB Course')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-green/15 hover:bg-pcb-green text-pcb-green hover:text-pcb-navy border border-pcb-green/45 font-extrabold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Select &amp; Book</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+        <!-- Card 3: 2 Month Course -->
+        <div class="rounded-3xl bg-pcb-card border border-pcb-border hover:border-pcb-amber p-6 flex flex-col justify-between shadow-xl transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-amber border border-pcb-border">
+                POPULAR
+              </span>
+              <span class="text-xs text-slate-400 font-mono">2 Months</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">2 Month PCB Course</h3>
+            <p class="text-3xl sm:text-4xl font-black text-pcb-amber my-3">₹30,000</p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-0.5"></i> Inverter AC &amp; Fridge PCB focus</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-0.5"></i> Detailed fault finding &amp; repair</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-0.5"></i> Free stay &amp; parking included</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('2 Month PCB Course')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-amber/15 hover:bg-pcb-amber text-pcb-amber hover:text-pcb-navy border border-pcb-amber/45 font-extrabold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Select &amp; Book</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+        <!-- Card 4: 1 Year Master Course -->
+        <div class="rounded-3xl bg-gradient-to-b from-pcb-card to-pcb-slate border-2 border-pcb-amber p-6 flex flex-col justify-between shadow-2xl relative">
+          <span class="absolute -top-3 right-5 px-3 py-0.5 rounded-full bg-pcb-amber text-pcb-navy font-black text-[10px] tracking-wider uppercase shadow">
+            BEST VALUE
+          </span>
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-amber border border-pcb-amber/50">
+                MASTER PROGRAM
+              </span>
+              <span class="text-xs text-slate-300 font-mono">1 Year</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">1 Year Master Course</h3>
+            <p class="text-3xl sm:text-4xl font-black text-pcb-amber my-3">₹45,000</p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-0.5"></i> All 4 Major Appliance Modules</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-0.5"></i> Official Completion Certificate</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-0.5"></i> Free accommodation &amp; parking</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('1 Year Master Course (All 4 PCB Modules + Certificate)')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-amber hover:bg-amber-400 text-pcb-navy font-extrabold text-sm transition-all flex items-center justify-center gap-2 shadow-lg">
+            <span>Select Master Course</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Specialized Training Modules -->
+  <section id="courses" class="py-14 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 sm:mb-12">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full bg-pcb-cyan/15 border border-pcb-cyan/35 text-pcb-cyan font-mono text-xs font-bold mb-2">
+            PRACTICAL CURRICULUM
+          </span>
+          <h2 class="fluid-section-title font-extrabold text-white">
+            Appliance PCB <span class="text-pcb-cyan">Repair Modules</span>
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400 flex items-center gap-1.5 lg:hidden">
+          <i class="fa-solid fa-arrows-left-right text-pcb-cyan"></i> Swipe cards to explore all modules
+        </p>
+      </div>
+
+      <!-- Swipeable Mobile Carousel / Desktop 4-Col Grid -->
+      <div id="coursesCarousel" class="mobile-snap-row gap-4 sm:gap-5 pb-2">
+        
+        <!-- Course 1: Inverter AC PCB Repair -->
+        <article class="mobile-snap-card rounded-2xl bg-pcb-card border border-pcb-border hover:border-pcb-green p-5 sm:p-6 flex flex-col justify-between shadow-xl transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-pcb-green/15 border border-pcb-green/35 flex items-center justify-center text-pcb-green text-xl">
+                <i class="fa-solid fa-snowflake"></i>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-green border border-pcb-border">
+                MODULE 01
+              </span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-white mb-2.5">
+              1. Inverter AC PCB Repair
+            </h3>
+            <ul class="text-xs sm:text-sm text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-1 text-xs"></i> IPM Module, PFC &amp; SMPS Power Supply</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-1 text-xs"></i> Indoor–Outdoor Communication Circuits</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-1 text-xs"></i> Temperature Sensor &amp; Error Code Diagnosis</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('Inverter AC PCB Repair')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-green/15 hover:bg-pcb-green text-pcb-green hover:text-pcb-navy border border-pcb-green/45 font-extrabold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Select Module</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </article>
+
+        <!-- Course 2: Non-Inverter AC PCB Repair -->
+        <article class="mobile-snap-card rounded-2xl bg-pcb-card border border-pcb-border hover:border-pcb-cyan p-5 sm:p-6 flex flex-col justify-between shadow-xl transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-pcb-cyan/15 border border-pcb-cyan/35 flex items-center justify-center text-pcb-cyan text-xl">
+                <i class="fa-solid fa-wind"></i>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-cyan border border-pcb-border">
+                MODULE 02
+              </span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-white mb-2.5">
+              2. Non-Inverter AC PCB Repair
+            </h3>
+            <ul class="text-xs sm:text-sm text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-cyan mt-1 text-xs"></i> Relay Switching &amp; Compressor Driver IC</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-cyan mt-1 text-xs"></i> Step-Down Transformer &amp; Voltage Regulators</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-cyan mt-1 text-xs"></i> Fan Speed, Swing Motor &amp; Display Control</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('Non-Inverter AC PCB Repair')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-cyan/15 hover:bg-pcb-cyan text-pcb-cyan hover:text-pcb-navy border border-pcb-cyan/45 font-extrabold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Select Module</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </article>
+
+        <!-- Course 3: Microwave Oven PCB Repair -->
+        <article class="mobile-snap-card rounded-2xl bg-pcb-card border border-pcb-border hover:border-pcb-amber p-5 sm:p-6 flex flex-col justify-between shadow-xl transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-pcb-amber/15 border border-pcb-amber/35 flex items-center justify-center text-pcb-amber text-xl">
+                <i class="fa-solid fa-wave-square"></i>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-amber border border-pcb-border">
+                MODULE 03
+              </span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-white mb-2.5">
+              3. Microwave Oven PCB Repair
+            </h3>
+            <ul class="text-xs sm:text-sm text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-1 text-xs"></i> Touchpad / Membrane Keypad Matrix Repair</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-1 text-xs"></i> Magnetron Relay Driver &amp; Microcontroller</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-amber mt-1 text-xs"></i> Door Safety Interlock &amp; Convection Logic</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('Microwave Oven PCB Repair')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-amber/15 hover:bg-pcb-amber text-pcb-amber hover:text-pcb-navy border border-pcb-amber/45 font-extrabold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Select Module</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </article>
+
+        <!-- Course 4: Refrigerator PCB Repair -->
+        <article class="mobile-snap-card rounded-2xl bg-pcb-card border border-pcb-border hover:border-pcb-green p-5 sm:p-6 flex flex-col justify-between shadow-xl transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl bg-pcb-green/15 border border-pcb-green/35 flex items-center justify-center text-pcb-green text-xl">
+                <i class="fa-solid fa-temperature-low"></i>
+              </div>
+              <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-pcb-navy text-pcb-green border border-pcb-border">
+                MODULE 04
+              </span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-white mb-2.5">
+              4. Refrigerator PCB Repair
+            </h3>
+            <ul class="text-xs sm:text-sm text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-1 text-xs"></i> Inverter Compressor Drive &amp; BLDC Fan</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-1 text-xs"></i> Defrost Heater &amp; NTC Sensor Feedback</li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pcb-green mt-1 text-xs"></i> Damper Control &amp; Dual-Rail Power Supply</li>
+            </ul>
+          </div>
+          <button type="button" onclick="selectCourseAndBook('Refrigerator PCB Repair')"
+                  class="tap-target w-full py-3 px-4 rounded-xl bg-pcb-green/15 hover:bg-pcb-green text-pcb-green hover:text-pcb-navy border border-pcb-green/45 font-extrabold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Select Module</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Workshop Facilities: Free Accommodation, Parking & Working Batch Section -->
+  <section id="details" class="py-14 sm:py-20 bg-pcb-slate/80 border-y border-pcb-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      
+      <div class="text-center max-w-2xl mx-auto space-y-2.5">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-pcb-amber/15 border border-pcb-amber/35 text-pcb-amber font-mono text-xs font-bold">
+          WORKSHOP ADVANTAGES
+        </span>
+        <h2 class="fluid-section-title font-extrabold text-white">
+          Why Students Choose <span class="text-pcb-amber">PCB BUGS, Nagar Bazar</span>
+        </h2>
+      </div>
+
+      <!-- 4 High-Utility Feature Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="rounded-2xl bg-pcb-card border border-pcb-border p-5 space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-pcb-green/15 text-pcb-green flex items-center justify-center text-xl">
+            <i class="fa-solid fa-house-chimney-user"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Free Accommodation</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Outstation students get <strong class="text-pcb-green">100% Free Accommodation</strong> arrangement near the workshop in Nagar Bazar, South Dumdum.
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-pcb-card border border-pcb-border p-5 space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-pcb-cyan/15 text-pcb-cyan flex items-center justify-center text-xl">
+            <i class="fa-solid fa-square-parking"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Free Vehicle Parking</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Secure and spacious <strong class="text-pcb-cyan">Free Parking</strong> available for bikes and cars right at our commercial workshop venue.
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-pcb-card border border-pcb-border p-5 space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-pcb-amber/15 text-pcb-amber flex items-center justify-center text-xl">
+            <i class="fa-solid fa-business-time"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Special Working Batch</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <strong class="text-pcb-amber">Special batches for working technicians</strong> and professionals looking to upgrade their electronic repair skills.
+          </p>
+        </div>
+
+        <div class="rounded-2xl bg-pcb-card border border-pcb-border p-5 space-y-3">
+          <div class="w-12 h-12 rounded-xl bg-pcb-green/15 text-pcb-green flex items-center justify-center text-xl">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">No Batch System</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <strong class="text-pcb-green">Flexible joining &amp; individual learning pace</strong>. No waiting for rigid batch schedules—start your workshop training immediately.
+          </p>
+        </div>
+      </div>
+
+      <!-- Realistic Gold-and-Navy Official Completion Certificate Showcase -->
+      <div id="certificate" class="rounded-3xl bg-gradient-to-br from-pcb-card via-pcb-slate to-pcb-card border border-pcb-amber/45 p-5 sm:p-9 shadow-2xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Left Text Explanation -->
+          <div class="lg:col-span-5 space-y-4">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pcb-amber/15 border border-pcb-amber/40 text-pcb-amber font-mono text-xs font-bold">
+              <i class="fa-solid fa-certificate"></i> VERIFIED CREDENTIAL
+            </span>
+
+            <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight">
+              Official Certificate of Completion <span class="text-pcb-amber">After 1-Year Master Course</span>
+            </h3>
+
+            <p class="font-bengali text-sm sm:text-base text-slate-200 leading-relaxed">
+              নাগারবাজার, দক্ষিণ দমদম-এর <strong class="text-pcb-green">PCB BUGS</strong> ইনস্টিটিউট থেকে ১ বছরের মাস্টার কোর্স সফলভাবে সম্পন্ন করার পর শিক্ষার্থীদের <strong class="text-pcb-amber">Official Certificate of Completion</strong> দেওয়া হয়।
+            </p>
+
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
+              <li class="flex items-start gap-2.5">
+                <i class="fa-solid fa-circle-check text-pcb-green mt-0.5"></i>
+                <span>Build confidence for authorized service center technician positions.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i class="fa-solid fa-circle-check text-pcb-green mt-0.5"></i>
+                <span>Open your own independent appliance PCB repair shop in your local market.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right Interactive Realistic Certificate Preview -->
+          <div class="lg:col-span-7">
+            <div class="cert-gold-frame rounded-2xl p-4 sm:p-7 relative overflow-hidden">
+              <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded bg-pcb-amber/20 border border-pcb-amber/45 text-pcb-amber font-mono text-[10px] font-bold tracking-wider">
+                OFFICIAL PREVIEW
+              </span>
+
+              <div class="text-center space-y-3 sm:space-y-4 py-2">
+                <!-- Institute Logo Header -->
+                <div class="flex flex-col items-center">
+                  <div class="w-10 h-10 rounded-xl bg-pcb-green/15 border border-pcb-green/45 flex items-center justify-center text-pcb-green mb-1.5">
+                    <i class="fa-solid fa-microchip text-lg"></i>
+                  </div>
+                  <h4 class="text-lg sm:text-2xl font-black tracking-wider text-white">
+                    PCB <span class="text-pcb-green">BUGS</span>
+                  </h4>
+                  <p class="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-slate-400">
+                    Nagar Bazar, South Dumdum, West Bengal
+                  </p>
+                </div>
+
+                <div class="h-px w-4/5 mx-auto bg-gradient-to-r from-transparent via-pcb-amber/70 to-transparent"></div>
+
+                <!-- Certificate Title -->
+                <div>
+                  <p class="font-serif italic text-xl sm:text-3xl font-bold text-pcb-amber">
+                    Official Certificate of Completion
+                  </p>
+                  <p class="text-[11px] sm:text-xs text-slate-400 mt-1">This is to certify that</p>
+                </div>
+
+                <!-- Live Interactive Student Name Preview -->
+                <div>
+                  <p id="certPreviewName" class="font-serif text-lg sm:text-2xl text-white border-b border-dashed border-pcb-amber/60 inline-block px-6 sm:px-10 pb-1">
+                    Your Full Name
+                  </p>
+                  <p class="text-[10px] text-slate-400 mt-1">(Type your name in the booking form below to preview live)</p>
+                </div>
+
+                <!-- Course Completion Statement -->
+                <p class="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto leading-relaxed">
+                  has successfully completed the <strong class="text-pcb-green">1-Year Practical Soldering &amp; Workshop Training</strong> in <span class="text-white font-semibold">Inverter AC, Non-Inverter AC, Microwave &amp; Refrigerator PCB Repair</span>.
+                </p>
+
+                <!-- Certificate Footer Seal & Signatures -->
+                <div class="pt-3 flex items-center justify-between text-[10px] sm:text-xs font-mono text-slate-400 border-t border-pcb-border/70">
+                  <div class="text-left">
+                    <p class="text-slate-200 font-bold">ID: PCBB-CERT-2026</p>
+                    <p>Nagar Bazar, South Dumdum</p>
+                  </div>
+
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-pcb-amber to-amber-600 text-pcb-navy flex items-center justify-center shadow-lg border-2 border-amber-200">
+                    <i class="fa-solid fa-award text-xl"></i>
+                  </div>
+
+                  <div class="text-right">
+                    <p class="text-pcb-green font-bold">Authorized Signatory</p>
+                    <p>Director, PCB BUGS</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Online Admission Slot Booking Section -->
+  <section id="booking" class="py-14 sm:py-20 bg-pcb-slate/85 border-y border-pcb-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pcb-green/15 border border-pcb-green/35 text-pcb-green font-mono text-xs font-bold">
+          <span class="w-2 h-2 rounded-full bg-pcb-green animate-ping"></span>
+          NAGAR BAZAR • ONLINE ADMISSION SLIP
+        </span>
+        <h2 class="fluid-section-title font-extrabold text-white">
+          Book Your Training Slot <span class="text-pcb-green">Online</span>
+        </h2>
+        <p class="font-bengali text-sm sm:text-base text-slate-300">
+          ফর্মটি পূরণ করুন—আপনার <strong class="text-pcb-amber">Digital Admission Slip</strong> তৈরি হয়ে সরাসরি <strong class="text-pcb-green">WhatsApp (09804265067)</strong>-এ চলে যাবে।
+        </p>
+      </div>
+
+      <div class="rounded-3xl bg-pcb-card border border-pcb-border p-5 sm:p-8 shadow-2xl">
+        <!-- Inline Error Alert -->
+        <div id="formAlert" class="hidden mb-5 p-4 rounded-2xl bg-red-500/15 border border-red-500/45 text-red-200 text-sm flex items-start gap-3">
+          <i class="fa-solid fa-circle-exclamation text-red-400 mt-0.5"></i>
+          <span id="formAlertText">Please fill in all required fields.</span>
+        </div>
+
+        <form id="admissionForm" class="space-y-5" novalidate>
+          <!-- Row 1: Full Name & 10-Digit Mobile/WhatsApp -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div>
+              <label for="fullName" class="block text-sm font-bold text-slate-200 mb-1.5">
+                Full Name <span class="text-pcb-green">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                  <i class="fa-solid fa-user"></i>
+                </span>
+                <input type="text" id="fullName" name="fullName" required placeholder="Enter student's full name"
+                       class="tap-target w-full pl-11 pr-4 py-3 rounded-xl bg-pcb-navy border border-pcb-border focus:border-pcb-green focus:ring-1 focus:ring-pcb-green text-white placeholder-slate-500 text-base sm:text-sm outline-none transition-all" />
+              </div>
+            </div>
+
+            <div>
+              <label for="mobileNumber" class="block text-sm font-bold text-slate-200 mb-1.5">
+                10-Digit Mobile / WhatsApp Number <span class="text-pcb-green">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-pcb-green">
+                  <i class="fa-brands fa-whatsapp text-base"></i>
+                </span>
+                <input type="tel" id="mobileNumber" name="mobileNumber" inputmode="numeric" maxlength="14" required placeholder="e.g. 9876543210"
+                       class="tap-target w-full pl-11 pr-4 py-3 rounded-xl bg-pcb-navy border border-pcb-border focus:border-pcb-green focus:ring-1 focus:ring-pcb-green text-white placeholder-slate-500 text-base sm:text-sm outline-none transition-all" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Course Selection Dropdown & Education Qualification -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div>
+              <label for="courseSelect" class="block text-sm font-bold text-slate-200 mb-1.5">
+                Select Course Package &amp; Fee <span class="text-pcb-green">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-pcb-cyan">
+                  <i class="fa-solid fa-indian-rupee-sign"></i>
+                </span>
+                <select id="courseSelect" name="courseSelect" required
+                        class="tap-target w-full pl-11 pr-10 py-3 rounded-xl bg-pcb-navy border border-pcb-border focus:border-pcb-green focus:ring-1 focus:ring-pcb-green text-white text-base sm:text-sm outline-none transition-all appearance-none">
+                  <option value="1 Year Master Course (₹45,000)">1 Year Master Course (All 4 Modules) - ₹45,000</option>
+                  <option value="2 Month PCB Course (₹30,000)">2 Month PCB Course - ₹30,000</option>
+                  <option value="1 Month PCB Course (₹15,000)">1 Month PCB Course - ₹15,000</option>
+                  <option value="3 Days Demo Class (₹2,000)">3 Days Demo Class - ₹2,000</option>
+                  <option value="Special Working Batch (Custom)">Special Working Batch (Custom Timing)</option>
+                </select>
+                <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 pointer-events-none">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <label for="educationQual" class="block text-sm font-bold text-slate-200 mb-1.5">
+                Education Qualification <span class="text-pcb-green">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-pcb-amber">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </span>
+                <select id="educationQual" name="educationQual" required
+                        class="tap-target w-full pl-11 pr-10 py-3 rounded-xl bg-pcb-navy border border-pcb-border focus:border-pcb-green focus:ring-1 focus:ring-pcb-green text-white text-base sm:text-sm outline-none transition-all appearance-none">
+                  <option value="" disabled selected>Select Qualification</option>
+                  <option value="8th Pass">8th Pass</option>
+                  <option value="10th Pass">10th Pass</option>
+                  <option value="12th+ Pass">12th+ Pass</option>
+                  <option value="Working Technician">Working Technician</option>
+                </select>
+                <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 pointer-events-none">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Preferred Visit Date & Accommodation Requirement -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div>
+              <label for="visitDate" class="block text-sm font-bold text-slate-200 mb-1.5">
+                Preferred Workshop Visit / Joining Date <span class="text-pcb-green">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                  <i class="fa-regular fa-calendar-check"></i>
+                </span>
+                <input type="date" id="visitDate" name="visitDate" required
+                       class="tap-target w-full pl-11 pr-4 py-3 rounded-xl bg-pcb-navy border border-pcb-border focus:border-pcb-green focus:ring-1 focus:ring-pcb-green text-white text-base sm:text-sm outline-none transition-all" />
+              </div>
+            </div>
+
+            <div>
+              <label for="accommodationNeed" class="block text-sm font-bold text-slate-200 mb-1.5">
+                Accommodation &amp; Parking Needed? <span class="text-pcb-green font-normal">(Free)</span>
+              </label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-pcb-cyan">
+                  <i class="fa-solid fa-house-chimney"></i>
+                </span>
+                <select id="accommodationNeed" name="accommodationNeed"
+                        class="tap-target w-full pl-11 pr-10 py-3 rounded-xl bg-pcb-navy border border-pcb-border focus:border-pcb-green focus:ring-1 focus:ring-pcb-green text-white text-base sm:text-sm outline-none transition-all appearance-none">
+                  <option value="Need Free Accommodation & Parking">Yes, Need Free Accommodation &amp; Parking</option>
+                  <option value="Need Free Parking Only">Need Free Parking Only (Local Student)</option>
+                  <option value="No Accommodation Needed">No Accommodation / Parking Needed</option>
+                </select>
+                <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 pointer-events-none">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit CTA Button -->
+          <button type="submit"
+                  class="tap-target w-full py-4 px-6 rounded-2xl bg-pcb-green hover:bg-pcb-greenDark text-pcb-navy font-black text-base sm:text-lg shadow-xl shadow-pcb-green/25 transition-all flex items-center justify-center gap-3">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+            <span>Generate Slip &amp; Book on WhatsApp</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Center Location & Embedded Google Map Section -->
+  <section id="location" class="py-14 sm:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Address & Direct Contact Buttons -->
+        <div class="lg:col-span-5 space-y-5">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-pcb-cyan/15 border border-pcb-cyan/35 text-pcb-cyan font-mono text-xs font-bold">
+            NAGAR BAZAR WORKSHOP LOCATION
+          </span>
+
+          <h2 class="fluid-section-title font-extrabold text-white">
+            Visit Our Center in <span class="text-pcb-green">Nagar Bazar, South Dumdum</span>
+          </h2>
+
+          <div class="rounded-2xl bg-pcb-card border border-pcb-border p-5 space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-pcb-green/15 text-pcb-green flex items-center justify-center text-lg shrink-0 mt-0.5">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white text-base">PCB BUGS Training Institute</p>
+                <p class="text-sm text-slate-300 mt-0.5">Nagar Bazar, South Dumdum, West Bengal</p>
+                <p class="text-xs text-pcb-amber font-semibold mt-1">Free Accommodation &amp; Parking Available</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- One-Tap Action Buttons -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <a href="https://www.google.com/maps/search/?api=1&query=Nagar+Bazar%2C+South+Dumdum%2C+West+Bengal" target="_blank" rel="noopener noreferrer"
+               class="tap-target py-3.5 px-4 rounded-xl bg-pcb-card hover:bg-pcb-cardHover text-pcb-cyan border border-pcb-cyan/45 font-bold text-sm flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <span>Open in Google Maps</span>
+            </a>
+
+            <a href="https://wa.me/919804265067?text=Hello%20PCB%20BUGS%2C%20Nagar%20Bazar.%20Please%20share%20directions." target="_blank" rel="noopener noreferrer"
+               class="tap-target py-3.5 px-4 rounded-xl bg-pcb-green hover:bg-pcb-greenDark text-pcb-navy font-extrabold text-sm flex items-center justify-center gap-2 transition-all">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Call / WhatsApp Now</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded Responsive Google Map -->
+        <div class="lg:col-span-7">
+          <div class="rounded-3xl overflow-hidden border border-pcb-border bg-pcb-card shadow-2xl">
+            <div class="px-4 py-3 bg-pcb-navy border-b border-pcb-border flex items-center justify-between text-xs font-mono text-slate-300">
+              <span><i class="fa-solid fa-satellite-dish text-pcb-green mr-1.5"></i>NAGAR BAZAR, SOUTH DUMDUM</span>
+              <span class="text-pcb-cyan">Kolkata, West Bengal</span>
+            </div>
+            <div class="w-full h-64 sm:h-80 bg-pcb-navy">
+              <iframe
+                title="PCB BUGS Location Map - Nagar Bazar, South Dumdum"
+                src="https://maps.google.com/maps?q=Nagar%20Bazar%2C%20South%20Dumdum%2C%20West%20Bengal&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                class="w-full h-full border-0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile-Friendly Expandable FAQ Accordion Section -->
+  <section id="faq" class="py-14 sm:py-20 bg-pcb-slate/70 border-t border-pcb-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10 space-y-2">
+        <span class="inline-block px-3.5 py-1 rounded-full bg-pcb-green/15 border border-pcb-green/35 text-pcb-green font-mono text-xs font-bold">
+          STUDENT FAQS
+        </span>
+        <h2 class="fluid-section-title font-extrabold text-white">
+          Frequently Asked <span class="text-pcb-green">Questions</span>
+        </h2>
+      </div>
+
+      <div class="space-y-3" id="faqContainer">
+        <!-- FAQ 1 -->
+        <div class="faq-item open rounded-2xl bg-pcb-card border border-pcb-border overflow-hidden">
+          <button type="button" class="faq-trigger tap-target w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white">
+            <span>1. What are the course options and fee structures?</span>
+            <i class="fa-solid fa-chevron-down faq-chevron text-slate-400 transition-transform duration-300"></i>
+          </button>
+          <div class="faq-content">
+            <div class="overflow-hidden">
+              <p class="px-5 pb-4 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-pcb-border/50 pt-3">
+                We offer flexible durations: <strong class="text-pcb-cyan">3 Days Demo @ ₹2,000</strong>, <strong class="text-pcb-green">1 Month Course @ ₹15,000</strong>, <strong class="text-pcb-amber">2 Month Course @ ₹30,000</strong>, and the <strong class="text-pcb-amber">1 Year Master Course @ ₹45,000</strong> (with Official Completion Certificate).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item rounded-2xl bg-pcb-card border border-pcb-border overflow-hidden">
+          <button type="button" class="faq-trigger tap-target w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white">
+            <span>2. Is accommodation and vehicle parking really free?</span>
+            <i class="fa-solid fa-chevron-down faq-chevron text-slate-400 transition-transform duration-300"></i>
+          </button>
+          <div class="faq-content">
+            <div class="overflow-hidden">
+              <p class="px-5 pb-4 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-pcb-border/50 pt-3">
+                Yes! Both <strong class="text-pcb-green">accommodation</strong> for outstation students and <strong class="text-pcb-cyan">vehicle parking</strong> at our Nagar Bazar workshop are provided completely free of charge.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item rounded-2xl bg-pcb-card border border-pcb-border overflow-hidden">
+          <button type="button" class="faq-trigger tap-target w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white">
+            <span>3. Is there any rigid batch system? Do you have working batches?</span>
+            <i class="fa-solid fa-chevron-down faq-chevron text-slate-400 transition-transform duration-300"></i>
+          </button>
+          <div class="faq-content">
+            <div class="overflow-hidden">
+              <p class="px-5 pb-4 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-pcb-border/50 pt-3">
+                <strong class="text-pcb-amber">No batch system!</strong> You can join anytime with flexible individual learning paces. We also maintain <strong class="text-pcb-green">special batches for working technicians</strong> and professionals.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item rounded-2xl bg-pcb-card border border-pcb-border overflow-hidden">
+          <button type="button" class="faq-trigger tap-target w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white">
+            <span>4. What kind of practical training and soldering practice is given?</span>
+            <i class="fa-solid fa-chevron-down faq-chevron text-slate-400 transition-transform duration-300"></i>
+          </button>
+          <div class="faq-content">
+            <div class="overflow-hidden">
+              <p class="px-5 pb-4 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-pcb-border/50 pt-3">
+                Our workshop focuses heavily on <strong class="text-pcb-green">hands-on soldering practice</strong>, component replacement, SMD rework, and live fault-tracing on commercial Inverter AC, Refrigerator, and Microwave circuit boards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-pcb-navy border-t border-pcb-border py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <span class="text-xl font-black text-white">PCB <span class="text-pcb-green">BUGS</span></span>
+        <p class="text-xs text-slate-400 mt-1">Nagar Bazar, South Dumdum, West Bengal • Free Stay &amp; Parking</p>
+      </div>
+      <div class="text-xs text-slate-400">
+        <p class="text-pcb-amber font-bold">PCB BUGS – Learn Skills, Build Your Future!</p>
+        <p class="mt-1">© <span id="footerYear"></span> PCB BUGS. WhatsApp Booking: 09804265067</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick-Action Button -->
+  <a href="https://wa.me/919804265067?text=Hello%20PCB%20BUGS%2C%20Nagar%20Bazar.%20I%20want%20to%20enquire%20about%20PCB%20Training."
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Chat on WhatsApp with PCB BUGS"
+     class="fixed right-4 bottom-24 lg:bottom-6 z-40 w-14 h-14 rounded-full bg-pcb-green hover:bg-pcb-greenDark text-pcb-navy shadow-2xl flex items-center justify-center animate-pulse-glow transition-transform hover:scale-105">
+    <i class="fa-brands fa-whatsapp text-3xl"></i>
+  </a>
+
+  <!-- Sticky Glassmorphism Bottom Mobile App Navigation Bar -->
+  <nav aria-label="Mobile Bottom Navigation" class="fixed bottom-0 inset-x-0 z-40 glass-bottom-bar border-t border-pcb-border/90 lg:hidden">
+    <div class="grid grid-cols-5 h-16 max-w-lg mx-auto px-1">
+      <a href="#home" data-section="home" class="bottom-tab active flex flex-col items-center justify-center text-[10px] font-bold text-slate-400 transition-colors">
+        <span class="tab-icon-wrap w-8 h-7 rounded-lg border border-transparent flex items-center justify-center mb-0.5 transition-all">
+          <i class="fa-solid fa-house text-sm"></i>
+        </span>
+        <span>Home</span>
+      </a>
+
+      <a href="#pricing" data-section="pricing" class="bottom-tab flex flex-col items-center justify-center text-[10px] font-bold text-slate-400 transition-colors">
+        <span class="tab-icon-wrap w-8 h-7 rounded-lg border border-transparent flex items-center justify-center mb-0.5 transition-all">
+          <i class="fa-solid fa-indian-rupee-sign text-sm"></i>
+        </span>
+        <span>Fees</span>
+      </a>
+
+      <a href="#certificate" data-section="certificate" class="bottom-tab flex flex-col items-center justify-center text-[10px] font-bold text-slate-400 transition-colors">
+        <span class="tab-icon-wrap w-8 h-7 rounded-lg border border-transparent flex items-center justify-center mb-0.5 transition-all">
+          <i class="fa-solid fa-award text-sm"></i>
+        </span>
+        <span>Certificate</span>
+      </a>
+
+      <a href="#location" data-section="location" class="bottom-tab flex flex-col items-center justify-center text-[10px] font-bold text-slate-400 transition-colors">
+        <span class="tab-icon-wrap w-8 h-7 rounded-lg border border-transparent flex items-center justify-center mb-0.5 transition-all">
+          <i class="fa-solid fa-location-dot text-sm"></i>
+        </span>
+        <span>Map</span>
+      </a>
+
+      <a href="#booking" data-section="booking" class="bottom-tab flex flex-col items-center justify-center text-[10px] font-extrabold text-pcb-green transition-colors">
+        <span class="tab-icon-wrap w-9 h-7 rounded-lg bg-pcb-green text-pcb-navy flex items-center justify-center mb-0.5 shadow">
+          <i class="fa-solid fa-calendar-check text-sm"></i>
+        </span>
+        <span>Book Now</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Full-Screen Classroom Photo Pinch/Zoom Lightbox Modal -->
+  <div id="photoLightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-pcb-navy/95 backdrop-blur-md" role="dialog" aria-modal="true" aria-label="Workshop Lab Photo Lightbox">
+    <div class="relative w-full max-w-5xl rounded-3xl bg-pcb-card border border-pcb-green/50 p-3 sm:p-5 shadow-2xl">
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-pcb-border">
+        <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-pcb-green"></span>
+          PCB BUGS Workshop &amp; Soldering Lab (Nagar Bazar, South Dumdum)
+        </span>
+        <div class="flex items-center gap-2">
+          <button type="button" id="toggleZoomBtn" class="tap-target px-3 py-1.5 rounded-xl bg-pcb-navy border border-pcb-cyan/40 text-pcb-cyan text-xs font-bold">
+            <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Toggle Zoom
+          </button>
+          <button type="button" id="closeLightboxBtn" aria-label="Close Lightbox" class="tap-target w-11 h-11 rounded-xl bg-pcb-navy border border-pcb-border text-slate-200 flex items-center justify-center">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-auto max-h-[72vh] rounded-2xl bg-pcb-navy border border-pcb-border flex items-center justify-center">
+        <img id="lightboxImage" src="146815_2.png" alt="PCB BUGS Workshop Lab Full View" class="w-full h-auto object-contain transition-transform duration-300 origin-center" />
+      </div>
+
+      <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
+        <span><i class="fa-solid fa-location-dot text-pcb-green mr-1"></i>Nagar Bazar, South Dumdum • Free Stay &amp; Parking • WhatsApp: 09804265067</span>
+        <a href="#booking" id="lightboxBookCta" class="px-4 py-2 rounded-xl bg-pcb-green text-pcb-navy font-extrabold">
+          Book Training Slot →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instant Digital Admission Slip Modal -->
+  <div id="slipModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-pcb-navy/90 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Digital Admission Slip">
+    <div class="bg-pcb-card border-2 border-pcb-green/60 rounded-3xl max-w-md w-full p-5 sm:p-7 shadow-2xl relative">
+      <button type="button" id="closeSlipModalBtn" aria-label="Close Admission Slip"
+              class="tap-target absolute top-4 right-4 w-10 h-10 rounded-full bg-pcb-navy border border-pcb-border text-slate-300 flex items-center justify-center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Screenshot-Friendly Admission Slip Header -->
+      <div class="border-b border-dashed border-pcb-border pb-4 mb-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-pcb-green text-pcb-navy flex items-center justify-center text-lg font-black">
+            <i class="fa-solid fa-ticket"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-white">DIGITAL ADMISSION SLIP</h3>
+            <p class="font-mono text-xs font-bold text-pcb-amber" id="slipBookingId">ID: PCBB-2026-0000</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-300 mb-3">
+        Take a screenshot of this slip or send directly to <strong class="text-pcb-green">WhatsApp (09804265067)</strong> for instant confirmation:
+      </p>
+
+      <!-- Formatted Slip Content -->
+      <div id="slipDetailsBox" class="rounded-2xl bg-pcb-navy border border-pcb-border p-4 font-mono text-xs text-slate-200 whitespace-pre-line leading-relaxed mb-5"></div>
+
+      <div class="flex flex-col sm:flex-row gap-2.5">
+        <a id="slipWhatsappBtn" href="#" target="_blank" rel="noopener noreferrer"
+           class="tap-target flex-1 py-3.5 px-4 rounded-xl bg-pcb-green hover:bg-pcb-greenDark text-pcb-navy font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          <span>Open WhatsApp</span>
+        </a>
+        <button type="button" id="copySlipBtn"
+                class="tap-target py-3.5 px-4 rounded-xl bg-pcb-navy hover:bg-pcb-border text-white border border-pcb-border font-bold text-sm flex items-center justify-center gap-2">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copySlipLabel">Copy Slip</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Logic Script -->
+  <script>
+    function getClassroomFallbackSvg() {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#060d1f"/>
+            <stop offset="100%" stop-color="#0d1936"/>
+          </linearGradient>
+        </defs>
+        <rect width="800" height="450" fill="url(#bg)"/>
+        <g stroke="#00e676" stroke-opacity="0.22" stroke-width="2" fill="none">
+          <path d="M40 80 H240 L280 120 H520 L560 80 H760"/>
+          <path d="M40 370 H220 L260 330 H540 L580 370 H760"/>
+          <circle cx="240" cy="80" r="5" fill="#00e676"/>
+          <circle cx="560" cy="80" r="5" fill="#00e5ff"/>
+        </g>
+        <rect x="190" y="135" width="420" height="180" rx="20" fill="#0a142c" stroke="#00e676" stroke-width="2.5"/>
+        <text x="400" y="195" fill="#ffffff" font-family="sans-serif" font-size="32" font-weight="800" text-anchor="middle">PCB <tspan fill="#00e676">BUGS</tspan> WORKSHOP</text>
+        <text x="400" y="232" fill="#ffca28" font-family="sans-serif" font-size="15" font-weight="700" text-anchor="middle">Nagar Bazar, South Dumdum • Free Stay &amp; Parking</text>
+        <text x="400" y="268" fill="#94a3b8" font-family="monospace" font-size="13" text-anchor="middle">WhatsApp: 09804265067 • No Batch System</text>
+      </svg>`;
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+      const classroomPhotoImg = document.getElementById('classroomPhotoImg');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const fallbackSrc = getClassroomFallbackSvg();
+
+      classroomPhotoImg.addEventListener('error', () => {
+        classroomPhotoImg.src = fallbackSrc;
+        lightboxImage.src = fallbackSrc;
+      }, { once: true });
+
+      // Mobile Drawer
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileDrawerBackdrop = document.getElementById('mobileDrawerBackdrop');
+      const mobileMenuOpenBtn = document.getElementById('mobileMenuOpenBtn');
+      const mobileMenuCloseBtn = document.getElementById('mobileMenuCloseBtn');
+
+      function openMobileDrawer() {
+        mobileDrawerBackdrop.classList.remove('hidden');
+        mobileDrawer.classList.remove('translate-x-full');
+      }
+
+      function closeMobileDrawer() {
+        mobileDrawer.classList.add('translate-x-full');
+        mobileDrawerBackdrop.classList.add('hidden');
+      }
+
+      mobileMenuOpenBtn.addEventListener('click', openMobileDrawer);
+      mobileMenuCloseBtn.addEventListener('click', closeMobileDrawer);
+      mobileDrawerBackdrop.addEventListener('click', closeMobileDrawer);
+      document.querySelectorAll('.drawer-link').forEach(link => {
+        link.addEventListener('click', closeMobileDrawer);
+      });
+
+      // Lightbox
+      const photoLightbox = document.getElementById('photoLightbox');
+      const classroomPhotoTrigger = document.getElementById('classroomPhotoTrigger');
+      const closeLightboxBtn = document.getElementById('closeLightboxBtn');
+      const toggleZoomBtn = document.getElementById('toggleZoomBtn');
+      const lightboxBookCta = document.getElementById('lightboxBookCta');
+      let isZoomed = false;
+
+      function openLightbox() {
+        isZoomed = false;
+        lightboxImage.style.transform = 'scale(1)';
+        photoLightbox.classList.remove('hidden');
+        photoLightbox.classList.add('flex');
+      }
+
+      function closeLightbox() {
+        photoLightbox.classList.add('hidden');
+        photoLightbox.classList.remove('flex');
+      }
+
+      classroomPhotoTrigger.addEventListener('click', openLightbox);
+      classroomPhotoTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') openLightbox();
+      });
+      closeLightboxBtn.addEventListener('click', closeLightbox);
+      lightboxBookCta.addEventListener('click', closeLightbox);
+      photoLightbox.addEventListener('click', (e) => {
+        if (e.target === photoLightbox) closeLightbox();
+      });
+
+      toggleZoomBtn.addEventListener('click', () => {
+        isZoomed = !isZoomed;
+        lightboxImage.style.transform = isZoomed ? 'scale(1.65)' : 'scale(1)';
+      });
+
+      // Mobile Carousel Dot Indicator Sync
+      const coursesCarousel = document.getElementById('coursesCarousel');
+      const carouselDots = document.querySelectorAll('#carouselDots span');
+      if (coursesCarousel && carouselDots.length > 0) {
+        coursesCarousel.addEventListener('scroll', () => {
+          const scrollLeft = coursesCarousel.scrollLeft;
+          const maxScroll = coursesCarousel.scrollWidth - coursesCarousel.clientWidth;
+          if (maxScroll <= 0) return;
+          const activeIndex = Math.min(3, Math.round((scrollLeft / maxScroll) * 3));
+          carouselDots.forEach((dot, idx) => {
+            if (idx === activeIndex) {
+              dot.className = 'w-6 h-2 rounded-full bg-pcb-green transition-all';
+            } else {
+              dot.className = 'w-2 h-2 rounded-full bg-pcb-border transition-all';
+            }
+          });
+        });
+      }
+
+      // Certificate Preview Name Sync
+      const fullNameInput = document.getElementById('fullName');
+      const certPreviewName = document.getElementById('certPreviewName');
+      fullNameInput.addEventListener('input', () => {
+        const val = fullNameInput.value.trim();
+        certPreviewName.textContent = val.length > 0 ? val : 'Your Full Name';
+      });
+
+      // Default Visit Date
+      const visitDateInput = document.getElementById('visitDate');
+      const todayIso = new Date().toISOString().split('T')[0];
+      visitDateInput.setAttribute('min', todayIso);
+      visitDateInput.value = todayIso;
+
+      // FAQ Accordion
+      document.querySelectorAll('.faq-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.faq-item');
+          const wasOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+          if (!wasOpen) item.classList.add('open');
+        });
+      });
+
+      // Bottom Nav Highlighter
+      const sections = ['home', 'pricing', 'certificate', 'location', 'booking'];
+      const bottomTabs = document.querySelectorAll('.bottom-tab');
+
+      window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY + 220;
+        let currentSection = 'home';
+        sections.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollPos) {
+            currentSection = id;
+          }
+        });
+        bottomTabs.forEach(tab => {
+          if (tab.dataset.section === currentSection) {
+            tab.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+          }
+        });
+      }, { passive: true });
+
+      // Admission Form Submission -> Digital Slip Modal + WhatsApp
+      const admissionForm = document.getElementById('admissionForm');
+      const formAlert = document.getElementById('formAlert');
+      const formAlertText = document.getElementById('formAlertText');
+      const slipModal = document.getElementById('slipModal');
+      const slipBookingId = document.getElementById('slipBookingId');
+      const slipDetailsBox = document.getElementById('slipDetailsBox');
+      const slipWhatsappBtn = document.getElementById('slipWhatsappBtn');
+      const closeSlipModalBtn = document.getElementById('closeSlipModalBtn');
+      const copySlipBtn = document.getElementById('copySlipBtn');
+      const copySlipLabel = document.getElementById('copySlipLabel');
+
+      function showAlert(msg) {
+        formAlertText.textContent = msg;
+        formAlert.classList.remove('hidden');
+        formAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      admissionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formAlert.classList.add('hidden');
+
+        const name = fullNameInput.value.trim();
+        const mobile = document.getElementById('mobileNumber').value.trim();
+        const course = document.getElementById('courseSelect').value;
+        const qual = document.getElementById('educationQual').value;
+        const dateVal = visitDateInput.value;
+        const accom = document.getElementById('accommodationNeed').value;
+
+        if (name.length < 2) {
+          showAlert('Please enter your Full Name.');
+          return;
+        }
+        const digits = mobile.replace(/\D/g, '');
+        if (digits.length < 10) {
+          showAlert('Please enter a valid 10-digit Mobile / WhatsApp Number.');
+          return;
+        }
+        if (!qual) {
+          showAlert('Please select your Education Qualification.');
+          return;
+        }
+        if (!dateVal) {
+          showAlert('Please choose your Preferred Visit Date.');
+          return;
+        }
+
+        const formattedDate = new Date(dateVal + 'T00:00:00').toLocaleDateString('en-IN', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        });
+        const randomCode = Math.floor(1000 + Math.random() * 9000);
+        const bookingId = `PCBB-2026-${randomCode}`;
+
+        const slipSummary =
+          `Booking ID: ${bookingId}\n` +
+          `Student Name: ${name}\n` +
+          `Mobile/WhatsApp: ${mobile}\n` +
+          `Package: ${course}\n` +
+          `Qualification: ${qual}\n` +
+          `Joining Date: ${formattedDate}\n` +
+          `Requirement: ${accom}\n` +
+          `Location: Nagar Bazar, South Dumdum\n` +
+          `Perks: Free Accommodation & Parking`;
+
+        const waText =
+          `*PCB BUGS – Nagar Bazar Admission Slip*\n` +
+          `*Booking ID:* ${bookingId}\n` +
+          `----------------------------------\n` +
+          `*Name:* ${name}\n` +
+          `*Mobile/WhatsApp:* ${mobile}\n` +
+          `*Package:* ${course}\n` +
+          `*Qualification:* ${qual}\n` +
+          `*Joining Date:* ${formattedDate}\n` +
+          `*Requirement:* ${accom}\n` +
+          `----------------------------------\n` +
+          `নমস্কার PCB BUGS, নাগারবাজার সেন্টারে আমি ট্রেনিং স্লট বুক করতে চাই। Please confirm.`;
+
+        const waUrl = `https://wa.me/919804265067?text=${encodeURIComponent(waText)}`;
+
+        slipBookingId.textContent = `ID: ${bookingId}`;
+        slipDetailsBox.textContent = slipSummary;
+        slipWhatsappBtn.href = waUrl;
+
+        slipModal.classList.remove('hidden');
+        slipModal.classList.add('flex');
+
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+      });
+
+      closeSlipModalBtn.addEventListener('click', () => {
+        slipModal.classList.add('hidden');
+        slipModal.classList.remove('flex');
+      });
+
+      slipModal.addEventListener('click', (e) => {
+        if (e.target === slipModal) {
+          slipModal.classList.add('hidden');
+          slipModal.classList.remove('flex');
+        }
+      });
+
+      copySlipBtn.addEventListener('click', () => {
+        const text = slipDetailsBox.textContent;
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          copySlipLabel.textContent = 'Copied!';
+          setTimeout(() => { copySlipLabel.textContent = 'Copy Slip'; }, 2000);
+        } catch (err) {
+          copySlipLabel.textContent = 'Copy Failed';
+        }
+        document.body.removeChild(ta);
+      });
+    });
+
+    function selectCourseAndBook(courseValue) {
+      const courseSelect = document.getElementById('courseSelect');
+      if (courseSelect) {
+        for (let i = 0; i < courseSelect.options.length; i++) {
+          if (courseSelect.options[i].value.includes(courseValue) || courseSelect.options[i].text.includes(courseValue)) {
+            courseSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      const bookingEl = document.getElementById('booking');
+      if (bookingEl) {
+        bookingEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  </script>
+</body>
+</html>
